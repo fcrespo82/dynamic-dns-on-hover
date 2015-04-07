@@ -22,5 +22,15 @@ setup(
         'console_scripts':
             ['hover-updater = hover.update:main',
         ]
-    }
+    },
+    classifiers=[
+        'Development Status :: 4 - Beta',
+        'Environment :: Console',
+        'Intended Audience :: End Users/Desktop',
+        'License :: OSI Approved :: Apache Software License',
+        'Operating System :: OS Independent',
+        'Programming Language :: Python :: 3',
+        'Topic :: Internet :: WWW/HTTP :: Site Management',
+
+    ],
 )
