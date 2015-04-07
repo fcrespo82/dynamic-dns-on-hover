@@ -7,9 +7,9 @@ setup(
     author_email='fernando82@gmail.com',
     packages=['hover'],
     #scripts=['bin/stowe-towels.py','bin/wash-towels.py'],
-    url='http://pypi.python.org/pypi/HoverIPUpdater/',
+    url='https://github.com/fcrespo82/dynamic-dns-on-hover',
     license=open('LICENSE.txt').read(),
-    description='Useful towel-related stuff.',
+    description='IP updater for Hover.com',
     long_description=open('README.txt').read(),
     install_requires=[
         "requests",
