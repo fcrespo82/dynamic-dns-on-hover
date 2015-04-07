@@ -5,28 +5,25 @@ Dynamic DNS for Hover
 Most code from https://gist.github.com/dankrause/5585907
 
 usage:
-    update.py --username=USERNAME --password=PASSWORD <domain> [--ip=IP] [--debug]
-    update.py --config=CONFIG <domain> [--ip=IP] [--debug]
+    update.py USERNAME PASSWORD <domain> [--ip=IP] [--debug]
 
 options:
 
-    --username=USERNAME  Your username on hover.com
-    --password=PASSWORD  Your password on hover.com
-    <domain>             Domain to update
-    --ip=IP              IP to set, if empty get external IP from ifconfig.me
-
-    --config=CONFIG      Read usernameand password from a INI like file
+    USERNAME            Your username on hover.com
+    PASSWORD            Your password on hover.com
+    <domain>            Domain to update
+    --ip=IP             IP to set, if empty get external IP from icanhazip.com
 
     --debug
 """
 
-import ConfigParser
+# import ConfigParser
 import docopt
 import requests
 import sys
 import logging
 
-VERSION = 0.1
+VERSION = '1.0.0'
 
 class HoverException(Exception):
     pass
@@ -52,7 +49,6 @@ class HoverAPI(object):
 
 
 def get_public_ip():
-    #return requests.get("http://ifconfig.me/ip").content
     return requests.get("http://icanhazip.com").content
 
 
@@ -84,17 +80,24 @@ def update_dns(username, password, fqdn, ip):
     if "succeeded" not in response or response["succeeded"] is not True:
         raise HoverException(response)
 
-    print "Updated record for {0} to: {1}".format(fqdn, ip)
+    print("Updated record for {0} to: {1}".format(fqdn, ip))
 
 
-def main(args):
+def main():
+    args = docopt.docopt(__doc__, version=VERSION)
+    thelevel = logging.ERROR
+    if args["--debug"]:
+        thelevel = logging.INFO
+    logging.basicConfig(level=thelevel)
+    logging.info(args)
+
     if args["--username"]:
         username, password = args["--username"], args["--password"]
-    else:
-        config = ConfigParser.ConfigParser()
-        config.read(args["--config"])
-        items = dict(config.items("hover"))
-        username, password = items["username"], items["password"]
+    # else:
+    #     config = ConfigParser.ConfigParser()
+    #     config.read(args["--config"])
+    #     items = dict(config.items("hover"))
+    #     username, password = items["username"], items["password"]
 
     domain = args["<domain>"]
     ip = args.get("--ip")
@@ -106,18 +109,12 @@ def main(args):
         logging.info(username, password, domain, ip)
         update_dns(username, password, domain, ip)
     except HoverException as e:
-        print "Unable to update DNS: {0}".format(e)
+        print("Unable to update DNS: {0}".format(e))
         return 1
 
     return 0
 
 
 if __name__ == "__main__":
-    args = docopt.docopt(__doc__, version=VERSION)
-    thelevel = logging.ERROR
-    if args["--debug"]:
-        thelevel = logging.INFO
-    logging.basicConfig(level=thelevel)
-    logging.info(args)
-    status = main(args)
+    status = main()
     sys.exit(status)
