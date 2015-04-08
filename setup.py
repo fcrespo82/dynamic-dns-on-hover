@@ -15,8 +15,6 @@ setup(
         "requests",
         "docopt",
         "requests",
-        "sys",
-        "logging",
     ],
     entry_points={
         'console_scripts':

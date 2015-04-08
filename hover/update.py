@@ -5,7 +5,7 @@ Dynamic DNS for Hover
 Most code from https://gist.github.com/dankrause/5585907
 
 usage:
-    update.py USERNAME PASSWORD <domain> [--ip=IP] [--debug]
+    hover-updater USERNAME PASSWORD <domain> [--ip=IP] [--debug]
 
 options:
 
@@ -91,13 +91,8 @@ def main():
     logging.basicConfig(level=thelevel)
     logging.info(args)
 
-    if args["--username"]:
-        username, password = args["--username"], args["--password"]
-    # else:
-    #     config = ConfigParser.ConfigParser()
-    #     config.read(args["--config"])
-    #     items = dict(config.items("hover"))
-    #     username, password = items["username"], items["password"]
+    if args["USERNAME"]:
+        username, password = args["USERNAME"], args["PASSWORD"]
 
     domain = args["<domain>"]
     ip = args.get("--ip")
