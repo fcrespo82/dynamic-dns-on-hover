@@ -1,0 +1,8 @@
+================
+Hover IP updater
+================
+
+Hover IP updater provides a cli (command line interface) to update a IP in
+hover. Typical usage often looks like this::
+
+    hover-updater USERNAME PASSWORD my.domain.com
