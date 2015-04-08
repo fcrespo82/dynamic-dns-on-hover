@@ -10,7 +10,7 @@ setup(
     url='https://github.com/fcrespo82/dynamic-dns-on-hover',
     license=open('LICENSE.txt').read(),
     description='IP updater for Hover.com',
-    long_description=open('README.txt').read(),
+    long_description=open('README.rst').read(),
     install_requires=[
         "requests",
         "docopt",
@@ -31,6 +31,5 @@ setup(
         'Operating System :: OS Independent',
         'Programming Language :: Python :: 3',
         'Topic :: Internet :: WWW/HTTP :: Site Management',
-
     ],
 )
