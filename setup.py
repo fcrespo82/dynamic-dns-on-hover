@@ -6,7 +6,6 @@ setup(
     author='Fernando Crespo',
     author_email='fernando82@gmail.com',
     packages=['hover'],
-    #scripts=['bin/stowe-towels.py','bin/wash-towels.py'],
     url='https://github.com/fcrespo82/dynamic-dns-on-hover',
     license=open('LICENSE.txt').read(),
     description='IP updater for Hover.com',
